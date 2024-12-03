@@ -1,4 +1,5 @@
-const { REST, Routes,ApplicationCommandOptionType } = require('discord.js');
+const { REST, Routes, ApplicationCommandOptionType, GatewayIntentBits } = require('discord.js');
+require('dotenv').config();
 
 const commands = [
     {
@@ -20,17 +21,15 @@ const commands = [
         ]
     }
 ];
-
-const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
+console.log(process.env.DISCORD_TOKEN);
+const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
+const prefix = '!';
 
 (async () => {
     try {
       console.log('Started refreshing SLASH (/) commands.');
-      await rest.put(
-        Routes.applicationGuildCommands(
-          process.env.CLIENT_ID,
-          process.env.GUILD_ID
-        ),
+      const data = await rest.put(
+        Routes.applicationGuildCommands( process.env.APP_ID, process.env.GUILD_ID ),
         { body: commands }
       );
       console.log('Successfully reloaded SLASH (/) commands.');
@@ -38,3 +37,6 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
       console.error(error);
     }
   })();
+
+const botIntents = [GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildMessages];
+module.exports = { botIntents, prefix, commands };

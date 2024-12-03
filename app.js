@@ -1,6 +1,8 @@
 const { Client, MessageEmbed } = require('discord.js');
-const { botIntents } = require('./config/config');
-const config = require('.env');
+const { botIntents, commands, prefix } = require('./config/config');
+const Discord = require('discord.js');
+require('dotenv').config();
+
 
 const client = new Client({
     intents: botIntents,
@@ -53,7 +55,7 @@ const getLastMsgs = async (msg) => {
   });
 
   const startBot = () => {
-    client.login(config.DISCORD_TOKEN);
+    client.login(process.env.DISCORD_TOKEN);
   };
   
   // export startBot as default
