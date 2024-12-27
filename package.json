@@ -1,28 +1,21 @@
 {
-    "name": "scratch",
-    "version": "1.0.0",
-    "description": "Discord example app made from a tutorial, but altered slightly",
-    "main": "src/app.js",
-    "type": "commonjs",
-    "engines": {
-        "node": ">=18.x"
-    },
-    "scripts": {
-        "start": "node app.js",
-        "register": "node commands.js",
-        "dev": "nodemon app.js"
-    },
-    "author": "Nathan Tsai",
-    "license": "MIT",
-    "dependencies": {
-        "discord-interactions": "^4.0.0",
-        "discord.js": "^14.16.3",
-        "dotenv": "^16.4.7",
-        "express": "^4.18.2",
-        "mongodb": "^6.12.0"
-    },
-    "devDependencies": {
-        "nodemon": "^3.1.9"
-    },
-    "keywords": []
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7",
+    "glob": "^11.0.0",
+    "lru-cache": "^11.0.2",
+    "rimraf": "^6.0.1",
+    "uui": "^1.0.7"
+  },
+  "name": "discord_calendar_app",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "app.js"
+  },
+  "keywords": [],
+  "author": "Nathan Tsai",
+  "license": "ISC",
+  "description": "Discord_calendar app"
 }

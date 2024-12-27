@@ -1,10 +1,8 @@
+require("dotenv").config();
+
 const { REST, Routes, Client, GatewayIntentBits, SlashCommandBuilder, Partials } = require("discord.js");
 const path = require('node:path');
 const fs = require("fs");
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://itsthefakejoe:wlDRkwPAWYfRXct3@cluster0.ofxtf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-require("dotenv").config();
 
 const client = new Client({
     intents: [
@@ -75,23 +73,11 @@ const rest = new REST().setToken(process.env.TOKEN);
 
 // mango time!
 
-const mango_client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
-  async function run() {
-    try {
-      // Connect the client to the server	(optional starting in v4.7)
-      await mango_client.connect();
-      // Send a ping to confirm a successful connection
-      await mango_client.db("admin").command({ ping: 1 });
-      console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await mango_client.close();
-    }
-  }
-  run().catch(console.dir);
+// const mango_client = new MongoClient(uri, {
+//     serverApi: {
+//       version: ServerApiVersion.v1,
+//       strict: true,
+//       deprecationErrors: true,
+//     }
+//   });
+

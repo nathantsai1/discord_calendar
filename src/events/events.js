@@ -1,15 +1,12 @@
-// const { Schema, model } = require("mongoose");
 const { Events } = require("discord.js");
-// var mongo = require('mongodb');
-// var MongoClient = require('mongodb').MongoClient;
 const embed = require('./subs/embed');
 function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) };
+require("dotenv").config();
 
 module.exports = {
     name: Events.InteractionCreate,
     once: false,
     async execute(interaction) {
-        console.log(interaction)
         // interaction.reply(interaction.user.id)
         const eventName = interaction.options.getString('event_name');
         const eventDate = interaction.options.getString('event_date');
@@ -52,32 +49,19 @@ module.exports = {
             let strings = `<@${interaction.user.id}> \n "${eventDate}"` + '```503 error: Please change event_date hour argument to be an integer between 1 to 24 ```'
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
             return false;
-        }
-        if (date == 1) {
+        } else if (date == 1) {
             let strings = `<@${interaction.user.id}> \n "${eventDate}"` + '```503 error: Please change event_date to be after 24 hours from now```'
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
             return false;
-        }
-        if (date == false) {
+        } else if (date == false) {
             let strings = `<@${interaction.user.id}>` + '```503 error: Please change event_date to be of valid date before 1 year from now```'
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
             return false;
         };
-        console.log(date)
-        const new_date = new Date(date)
-        // client.channels.get('1026279100626767924').send(message);
-        interaction.reply(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`)
+        const new_date = new Date(date);
+
+        interaction.reply(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`);
         interaction.user.send(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`);
-        // MongoClient.connect(url, function(err, db) {
-        //     if (err) throw err;
-        //     var dbo = db.db("mydb");
-        //     var myobj = { name: eventName, day: eventDate };
-        //     dbo.collection("events").insertOne(myobj, function(err, res) {
-        //       if (err) throw err;
-        //       console.log("1 document inserted");
-        //       db.close();
-        //     });
-        //   });
     }
     // interaction.channel.send(eventName[i]);
 }
