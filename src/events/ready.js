@@ -5,9 +5,9 @@ module.exports = {
     once: true,
     execute(client){
         console.log(`Ready! logged in as ${client.user.tag}`)
-
+        
         client.user.setActivity({
-            name: "Code with Nathan",
+            name: "i am bot",
             type: ActivityType.Watching,
         })
     }   

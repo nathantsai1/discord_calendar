@@ -18,16 +18,14 @@ const client = new Client({
         Partials.Message
     ]
 });
-
-
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs.readdirSync(eventsPath).filter((file)=>file.endsWith(".js"));
 const commands = [
-    new SlashCommandBuilder().setName('calendar').setDescription(`you set event and time/date of event, 
+    new SlashCommandBuilder().setName('add_event').setDescription(`you set event and time/date of event, 
         Scratch will tell/remind you time to date/event`)
         .addStringOption(option => 
             option.setName('event_name')
-                .setDescription('Your event name goes here(limit 30 characters)')
+                .setDescription('Your event name goes here(limit 30 characters and 5 EVENTS TOTAL)')
                 .setRequired(true)
                 .setMaxLength(30)
             )
@@ -37,9 +35,15 @@ const commands = [
                 .setRequired(true)
                 .setMinLength(10)
                 .setMaxLength(13)
-            )
+            ),
+    new SlashCommandBuilder().setName('delete_event').setDescription(`Delete an event - name the format of the event`)
+    .addStringOption(option => 
+        option.setName('event_name')
+            .setDescription('Your event name goes here')
+            .setRequired(true)
+            .setMaxLength(30)
+        ),
 ];
-
 for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);
     const event = require(filePath);
@@ -49,10 +53,7 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
-client.login(process.env.TOKEN);
-
 const rest = new REST().setToken(process.env.TOKEN);
-
 // and deploy your commands!
 (async () => {
 	try {
@@ -66,18 +67,6 @@ const rest = new REST().setToken(process.env.TOKEN);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	} catch (error) {
-		// And of course, make sure you catch and log any errors!
 		console.error(error);
 	}
 })();
-
-// mango time!
-
-// const mango_client = new MongoClient(uri, {
-//     serverApi: {
-//       version: ServerApiVersion.v1,
-//       strict: true,
-//       deprecationErrors: true,
-//     }
-//   });
-

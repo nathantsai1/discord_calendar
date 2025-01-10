@@ -1,0 +1,11 @@
+"000s: generic errors.
+      500: generic internal error.
+
+"500s: calendar_main information is wrong.
+      501: wrong length of string.
+      502: wrong format of string.
+      503: invalid date.
+
+"600s: issues with DB.
+      601: user holds too many events.
+Quit.
