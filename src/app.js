@@ -3,6 +3,7 @@ require("dotenv").config();
 const { REST, Routes, Client, GatewayIntentBits, SlashCommandBuilder, Partials } = require("discord.js");
 const path = require('node:path');
 const fs = require("fs");
+const { call } = require('./events/call_events')
 
 const client = new Client({
     intents: [
@@ -53,6 +54,9 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
+// client.once(Event.InteractionCreate, Event.execute(call(...args, client)));
+client.login(process.env.TOKEN);
+call(client);
 const rest = new REST().setToken(process.env.TOKEN);
 // and deploy your commands!
 (async () => {

@@ -24,15 +24,15 @@ function embedWarning(warning, title) {
     return hi;
 }
 
-function embedEvent(time, title) {
+function embedEvent(title, time) {
     const hi = new EmbedBuilder()
         .setColor(0x0099FF)
-        .setTitle(`⚠️ WARNING: Event(${title}) coming up soon! ⚠️`)
+        .setTitle(`⚠️ WARNING: Event "${title}" coming up soon! ⚠️`)
         .setAuthor({ name: 'Calendar App', iconURL: 'https://static-00.iconduck.com/assets.00/spiral-calendar-emoji-2048x2039-kbx4wd0j.png', url: 'https://discord.js.org' })
         .setDescription('The Calendar App has found errors in your response')
         .setThumbnail('https://files.slack.com/files-pri/T0266FRGM-F07A9MYQ8J1/blahaj-shock.webp?pub_secret=6d3125257e')
         .addFields(
-            { name: `Event Name: ${title}`, value: `${time} will happen in ${time}'s time` },
+            { name: `Event Name: ${title}`, value: `${title} will happen in ${time}'s time` },
             { name: '\u200B', value: '\u200B' },
             { name: `Type 'Cal_App help' for commands`, value: `\u200B` },
         )

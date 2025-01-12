@@ -1,7 +1,6 @@
 const { Events } = require("discord.js");
 const embed = require('./subs/embed');
 const { get_info, upload_info } = require('./NeonDB/db_work');
-
 function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) };
 require("dotenv").config();
 
