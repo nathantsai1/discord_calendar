@@ -31,6 +31,18 @@ async function get_all_info() {
   }
 }
 
+async function get_event_info(user_id, eventName) {
+  try {
+    const result = await sql`SELECT * FROM public.calendar_events_real WHERE discord_user_id = ${user_id}
+    AND event_name = ${eventName}`;
+    console.log(result);
+    return result;
+  } catch (error) {
+      console.log(error);
+      return 1;
+  }
+}
+
 async function upload_info(user_id, eventName, eventDate, server_id, event_channel_id) {
   try {
     const result = await sql`

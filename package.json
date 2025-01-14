@@ -11,6 +11,7 @@
   "name": "discord_calendar_app",
   "version": "1.0.0",
   "main": "src/app.js",
+  "type": "commonjs",
   "scripts": {
     "start": "app.js"
   },

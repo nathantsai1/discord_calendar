@@ -2,8 +2,10 @@ require("dotenv").config();
 
 const { REST, Routes, Client, GatewayIntentBits, SlashCommandBuilder, Partials } = require("discord.js");
 const path = require('node:path');
+const { get_all_info } = require('./events/NeonDB/db_work');
 const fs = require("fs");
-const { call } = require('./events/call_events')
+const { call } = require('./events/subs/call_events.js');
+const { embedEvent } = require('./events/subs/embed.js');
 
 const client = new Client({
     intents: [
@@ -56,7 +58,7 @@ for (const file of eventFiles) {
 }
 // client.once(Event.InteractionCreate, Event.execute(call(...args, client)));
 client.login(process.env.TOKEN);
-call(client);
+
 const rest = new REST().setToken(process.env.TOKEN);
 // and deploy your commands!
 (async () => {
@@ -70,7 +72,24 @@ const rest = new REST().setToken(process.env.TOKEN);
 		);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+        let x=0;
+let output;
+while (x < 2) {
+    // let info = get_all_info();
+    let info = [{id: 2,discord_user_id: '1100233829446324244',event_date: '1736836511',event_name: 'test',server_id: '786773227275026442',event_channel_id: '1224931117438861385'}]
+    output = await call(info);
+    if (output == output) {
+        for (const z in output) {
+            client.users.fetch(output[z][0], false).then((user) => { user.send({ embeds: [ embedEvent(output[z][1], output[z][2])]}); });
+        }
+    }
+    x++;
+};
+console.log('done');
 	} catch (error) {
 		console.error(error);
 	}
-})();
+})()
+
+
+
