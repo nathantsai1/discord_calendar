@@ -17,7 +17,7 @@ const client = new Client({
     ],
     
     partials: [
-        Partials.Channel,
+        // Partials.Channel,
         Partials.Message
     ]
 });
@@ -45,7 +45,8 @@ const commands = [
             .setDescription('Your event name goes here')
             .setRequired(true)
             .setMaxLength(30)
-        ),
+        ),,
+    new SlashCommandBuilder().setName('list_events').setDescription(`List all of your events`),
 ];
 for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);

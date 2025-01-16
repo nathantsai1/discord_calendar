@@ -43,6 +43,25 @@ function embedEvent(title, time) {
     return hi;
 }
 
+function embedList(list) {
+    const hi = new EmbedBuilder()
+        .setColor(0x0099FF)
+        .setTitle(`List of all your events`)
+        .setAuthor({ name: 'Calendar App', iconURL: 'https://static-00.iconduck.com/assets.00/spiral-calendar-emoji-2048x2039-kbx4wd0j.png', url: 'https://discord.js.org' })
+        .setDescription('The Calendar App has found all your registered events')
+        .setThumbnail('https://files.slack.com/files-pri/T0266FRGM-F07A9MYQ8J1/blahaj-shock.webp?pub_secret=6d3125257e')
+        .addFields(
+            list,
+            { name: '\u200B', value: '\u200B' },
+            { name: `Type 'Cal_App help' for commands`, value: `\u200B` },
+        )
+        // .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+        // .setImage('https://i.imgur.com/AfFp7pu.png')
+        .setTimestamp()
+        // .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
+    return hi;
+}
+
 function getDate(num) {
     const month = num[0] * 1 + num[1];
     const day = num[2]*1 + num[3];
@@ -81,4 +100,4 @@ function getDate(num) {
     }
     return timestamp;
 }
-module.exports = { embedWarning, getDate, embedEvent };
+module.exports = { embedWarning, getDate, embedEvent, embedList };

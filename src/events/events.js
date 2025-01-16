@@ -69,6 +69,7 @@ module.exports = {
 
         // add to DB
         const info = get_info(interaction.user.id);
+
         if (info) {
             // if there are events, check if their names intercollide with event_name
             if (info.length > 5) {
@@ -77,7 +78,7 @@ module.exports = {
                 interaction.reply({ embeds: [embed.embedWarning(strings, 'Database error')], ephemeral: true });
             }
             for (let i = 0; i < info.length; i++) {
-                if (info.event_name === eventName) {
+                if (info[i].event_name === eventName) {
                     let strings = make_string(`602 error: It seems like you have already created name ${eventName}. Please change it`, interaction.user.id);
                     interaction.reply({ embeds: [embed.embedWarning(strings, ' ??? error')], ephemeral: true });
                     return false;
@@ -99,9 +100,7 @@ module.exports = {
         const new_date = new Date(date);
 
         interaction.reply(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`);
-        interaction.user.send(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`);
-        
-
+        interaction.user.send(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`)
         }
     }
 }

@@ -5,7 +5,9 @@ module.exports = {
     name: Events.MessageCreate,
     once: false,
     execute(message) {
-        if(message.content === 'Cal_App help') {
+        console.log(message.content.toLowerCase())
+        // let lower = message.content.toLowerCase();
+        if(message.content.toLowerCase().includes('cal_app help')) {
             fs.readFile('src/events/txts/errorlist.txt', (err, data) => {
                 if (err) throw err;
                 let temp = data.toString();
@@ -43,6 +45,9 @@ module.exports = {
                     }
                 }
                 arg.push(
+                    {name: '\u200B', 
+                        value: `\n`},
+
                     {name: 'ALL COMMANDS', 
                             value: `\u200B`},
                     {name: '/add_event', value: `Adds an event to the discord_calendar_app's DB(5 events max per user).
