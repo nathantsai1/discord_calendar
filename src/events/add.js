@@ -30,6 +30,7 @@ module.exports = {
             interaction.reply({ embeds: [embed.embedWarning(strings, 'format error')] })
             return false;
         }
+        // check if date is in the right formate(2 dates, 1 dash, 0 other, all numbers)
         var num = [], dash = 0, other = 0;
         for (let i = 0; i < eventDate.length; i++) {
             if (eventDate[i] === "-") {
@@ -40,15 +41,14 @@ module.exports = {
                 other++;
             }
         }
-        // interaction.reply(`${num.length}, dash: ${dash}, other: ${other}, date: ${eventDate}`)
-        if ((!num.length == 8 || !dash == 2 && !other == 0) || (!num.length == 10 || !dash == 2 && !other == 1)) { 
-            // interaction.reply(`<@${interaction.user.error - please change `); 
+
+        if ((!dash == 2) || (!other == 0 && !other == 1) || (!num.length == 8 && !num.length == 10)) {
             let strings = make_string('502 error: Please change event_date to be of format: MM-DD-YYYY or MM-DD-YYYY HH', interaction.user.id);
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
             return false;
         };
+
         const date = embed.getDate(num);
-        
         // error check from main
         if (date == 0) {
             let strings = make_string('503 error: Please change event_date hour argument to be an integer between 1 to 24', interaction.user.id);
@@ -68,8 +68,11 @@ module.exports = {
         };
 
         // add to DB
-        const info = get_info(interaction.user.id);
 
+    
+        const info = get_info(interaction.user.id);
+    
+        // check if event names collide with each other
         if (info) {
             // if there are events, check if their names intercollide with event_name
             if (info.length > 5) {
@@ -98,7 +101,6 @@ module.exports = {
             return false;
         }
         const new_date = new Date(date);
-
         interaction.reply(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`);
         interaction.user.send(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`)
         }

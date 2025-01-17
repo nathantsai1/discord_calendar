@@ -7,7 +7,7 @@ const sql = neon(DATABASE_URL);
 async function get_info(user_id) {
   try {
     const result = await sql`SELECT * FROM public.calendar_events_real 
-      WHERE discord_user_id = '${user_id}'`;
+      WHERE discord_user_id = ${user_id.toString()}`;
     console.log(result);
     return result;
   } catch (error) {

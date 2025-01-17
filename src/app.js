@@ -45,7 +45,7 @@ const commands = [
             .setDescription('Your event name goes here')
             .setRequired(true)
             .setMaxLength(30)
-        ),,
+        ), 
     new SlashCommandBuilder().setName('list_events').setDescription(`List all of your events`),
 ];
 for (const file of eventFiles) {
@@ -77,11 +77,13 @@ const rest = new REST().setToken(process.env.TOKEN);
 let output;
 while (x < 2) {
     // let info = get_all_info();
-    let info = [{id: 2,discord_user_id: '1100233829446324244',event_date: '1736836511',event_name: 'test',server_id: '786773227275026442',event_channel_id: '1224931117438861385'}]
+    let info = [{id: 2,discord_user_id: '1100233829446324244',event_date: '1.7371633e+12',event_name: 'tesnt',server_id: '786773227275026442',event_channel_id: '1224931117438861385'}]
     output = await call(info);
     if (output == output) {
         for (const z in output) {
-            client.users.fetch(output[z][0], false).then((user) => { user.send({ embeds: [ embedEvent(output[z][1], output[z][2])]}); });
+            client.users.fetch(output[z][0], false).then((user) => { 
+                user.send({ embeds: [ embedEvent(output[z][1], output[z][2])]}); 
+            });
         }
     }
     x++;

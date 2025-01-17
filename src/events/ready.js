@@ -7,8 +7,8 @@ module.exports = {
         console.log(`Ready! logged in as ${client.user.tag}`)
         
         client.user.setActivity({
-            name: "i am bot",
-            type: ActivityType.Watching,
+            name: "with me 🤤",
+            type: ActivityType.Playing,
         })
     }   
 }

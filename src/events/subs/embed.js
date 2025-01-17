@@ -29,7 +29,7 @@ function embedEvent(title, time) {
         .setColor(0x0099FF)
         .setTitle(`⚠️ WARNING: Event "${title}" coming up soon! ⚠️`)
         .setAuthor({ name: 'Calendar App', iconURL: 'https://static-00.iconduck.com/assets.00/spiral-calendar-emoji-2048x2039-kbx4wd0j.png', url: 'https://discord.js.org' })
-        .setDescription('The Calendar App has found errors in your response')
+        .setDescription('The Calendar App has found an uncoming event(s)')
         .setThumbnail('https://files.slack.com/files-pri/T0266FRGM-F07A9MYQ8J1/blahaj-shock.webp?pub_secret=6d3125257e')
         .addFields(
             { name: `Event Name: ${title}`, value: `${title} will happen in ${time}'s time` },
@@ -95,7 +95,7 @@ function getDate(num) {
         // should be over 1 day
         return 2;
     } else if (timestamp - Date.now() > (60*60*24*365*1000)) {
-        // past one year
+        // past one year(should not be)
         return 3;
     }
     return timestamp;

@@ -1,5 +1,4 @@
 .env
 node_modules
-dbinit.sql
 /src/events/txts/outlines.txt
 /src/events/txts/sample.txt

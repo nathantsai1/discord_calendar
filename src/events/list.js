@@ -11,10 +11,19 @@ module.exports = {
         if (interaction.commandName == "list_events") {
             console.log('working on /list_events')
             const get_events = await get_info(interaction.user.id);
-            
+            console.log(get_events)
             // send events
             if (get_events.length == 0) {
-                interaction.reply({ embeds: [], ephemeral: true });
+                interaction.reply({ embeds: [ embedWarning([{name: 'None', value: "\u200B"}])], ephemeral: true });
+            } else {
+                let list = [];
+                let dates;
+                for (let i = 0; i < get_events.length; i++) {
+                    dates = new Date(Number(get_events[i].event_date)).toString();
+                    list.push({name: get_events[i].event_name, value: dates });
+                }
+
+                interaction.reply({ embeds: [ embedList(list)], ephemeral: true });
             }
         }
     }
