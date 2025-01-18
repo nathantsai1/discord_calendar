@@ -13,8 +13,10 @@ module.exports = {
             const get_events = await get_info(interaction.user.id);
             console.log(get_events)
             // send events
+            console.log(get_events.length == 0, get_events)
+
             if (get_events.length == 0) {
-                interaction.reply({ embeds: [ embedWarning([{name: 'None', value: "\u200B"}])], ephemeral: true });
+                interaction.reply({ embeds: [ embedList([{name: 'None', value: "```There seems to be no events with user '" + interaction.user.globalName + "'```"}])], ephemeral: true });
             } else {
                 let list = [];
                 let dates;

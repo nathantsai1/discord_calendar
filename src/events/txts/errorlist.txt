@@ -9,5 +9,6 @@
 "600s: issues with DB.
       601: user holds too many events.
       602: error with deleting db.
-      603: DB is empty
+      603: DB is empty.
+      604: No associated events.
 Quit.

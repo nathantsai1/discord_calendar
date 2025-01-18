@@ -19,7 +19,6 @@ async function get_info(user_id) {
 async function get_all_info() {
   try {
     const result = await sql`SELECT * FROM public.calendar_events_real`;
-    console.log(result);
     return result;
   } catch (error) {
       console.log(error);

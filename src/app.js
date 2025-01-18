@@ -2,11 +2,9 @@ require("dotenv").config();
 
 const { REST, Routes, Client, GatewayIntentBits, SlashCommandBuilder, Partials } = require("discord.js");
 const path = require('node:path');
-const { get_all_info } = require('./events/NeonDB/db_work');
 const fs = require("fs");
 const { call } = require('./events/subs/call_events.js');
 const { embedEvent } = require('./events/subs/embed.js');
-const { json_ex } = require('./events/subs/bulky.js');
 
 const client = new Client({
     intents: [
@@ -75,22 +73,20 @@ const rest = new REST().setToken(process.env.TOKEN);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
         let x=0;
-let output;
-while (x < 2) {
-    // let info = get_all_info();
-    let info =json_ex();
-    output = await call(info);
-    if (output == output) {
-        console.log(output)
-        for (const z in output) {
-            client.users.fetch(output[z][0], false).then((user) => { 
-                user.send({ embeds: [ embedEvent(output[z][1], output[z][2])]}); 
-            });
-        }
-    }
-    x++;
-};
-console.log('done');
+
+        let output;
+        while (x < 30) {
+            output = await call();
+            console.log('output', output, 'output')
+            if (output == output) {
+                for (const z in output) {
+                    client.users.fetch(output[z][0], false).then((user) => { 
+                        user.send({ embeds: [ embedEvent(output[z][1], output[z][2])]}); 
+                    });
+                }
+            }
+            x++;
+        };
 	} catch (error) {
 		console.error(error);
 	}

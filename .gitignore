@@ -1,7 +1,5 @@
 .env
 node_modules
-/src/events
-        /txts/outlines.txt
-            /sample.txt
-        /subs
-            /bulky.js
+/src/events/txts/outlines.txt
+/src/events/txts/sample.txt
+/src/events/subs/bulky.js

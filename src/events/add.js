@@ -1,13 +1,13 @@
 const { Events } = require("discord.js");
 const embed = require('./subs/embed');
 const { get_info, upload_info } = require('./NeonDB/db_work');
+const { json_ex } = require('./subs/bulky');
 function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) };
+const { make_string } = require('./subs/helpers.js');
 require("dotenv").config();
 
-function make_string(stringy, interaction_id) {
-    let stringed = `<@${interaction_id}>` + '```' + stringy + '```';
-    return stringed;
-}
+
+const ALLOWED_EVENTS = 10;
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -55,12 +55,10 @@ module.exports = {
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
             return false;
         } else if (date == 1) {
-            let strings = make_string('503 error: Please change event_date to be after 24 hours from now', interaction.user.id);
+            let dating = new Date()
+            let strings = make_string(`503 error: Please change event_date to be after ${dating.toLocaleDateString('en-US')}T${dating.getHours()}:${dating.getMinutes()}:${dating.getSeconds()} Locale time`, interaction.user.id);
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
             return false;
-        } else if (date == 2) {
-            let strings = make_string('503 error: Please change event_date to be after 24 hours from now', interaction.user.id);
-            interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
         } else if (date == 3) {
             let strings = make_string('503 error: Please change event_date to be of valid date before 1 year from now', interaction.user.id);
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
@@ -68,17 +66,17 @@ module.exports = {
         };
 
         // add to DB
-
     
-        const info = get_info(interaction.user.id);
-    
+        const info = await get_info(interaction.user.id);
+        
         // check if event names collide with each other
         if (info) {
             // if there are events, check if their names intercollide with event_name
-            if (info.length > 5) {
+            if (info.length > ALLOWED_EVENTS && interaction.user.id !== process.env.OWNER_ID) {
                 // holds too many events
                 let strings = make_string('601 error: It seems like you have too many events. Please delete using "/delete_event" command', interaction.user.id);
                 interaction.reply({ embeds: [embed.embedWarning(strings, 'Database error')], ephemeral: true });
+                return false;
             }
             for (let i = 0; i < info.length; i++) {
                 if (info[i].event_name === eventName) {
@@ -88,6 +86,7 @@ module.exports = {
                 }
             }
         } else if (info == 1) {
+            // i prob messed up somewhere if this happened
             let strings = make_string(`500 internal error: The Calendar App has found an error; We are currently trying our best to fix it. Thank you for your patience.`, interaction.user.id);
             interaction.reply({ embeds: [embed.embedWarning(strings, 'InternalServerError')], ephemeral: true });
             return false;
@@ -102,7 +101,8 @@ module.exports = {
         }
         const new_date = new Date(date);
         interaction.reply(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`);
-        interaction.user.send(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`)
+        interaction.user.send(`Success! <@${interaction.user.id}> has created an event: "${eventName}" at date: ${new_date}`);
+        return true;
         }
     }
 }

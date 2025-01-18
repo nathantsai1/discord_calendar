@@ -69,6 +69,12 @@ function getDate(num) {
 
     // get days
     var date = `${year}-${month}-${day}`
+    
+    if (num.length == 10) {
+        const hour = num[8] * 1 + num[9];
+        date = date.concat(` ${hour}:00:00`);
+    }
+    
     const event_due = new Date(date);
     // first error check
     if (year - event_due.getYear() < 2) {
@@ -78,10 +84,6 @@ function getDate(num) {
         // should be over today
         return 1;
     }
-    if (num.length == 10) {
-        const hour = num[8] * 1 + num[9];
-        date = date.concat(` ${hour}:00:00`);
-    }
     // var toEpoch = (year - 1970) * 3.156e+7 + (month - 1) * 
     const timestamp = epoch(event_due);
     // return(timestamp)
@@ -89,11 +91,9 @@ function getDate(num) {
         return 0;
     }
     else if (timestamp - Date.now() < 0) {
+        console.log(timestamp, Date.now(), timestamp-Date.now())
         // should be over today
         return 1;
-    } else if (timestamp - Date.now() < (60*60*24*1000)) {
-        // should be over 1 day
-        return 2;
     } else if (timestamp - Date.now() > (60*60*24*365*1000)) {
         // past one year(should not be)
         return 3;

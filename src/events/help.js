@@ -5,7 +5,6 @@ module.exports = {
     name: Events.MessageCreate,
     once: false,
     execute(message) {
-        console.log(message.content.toLowerCase())
         // let lower = message.content.toLowerCase();
         if(message.content.toLowerCase().includes('cal_app help')) {
             fs.readFile('src/events/txts/errorlist.txt', (err, data) => {
