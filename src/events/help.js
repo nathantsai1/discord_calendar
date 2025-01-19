@@ -1,5 +1,6 @@
-const { Events, EmbedBuilder } = require("discord.js");
 const fs = require('fs');
+
+const { Events, EmbedBuilder } = require("discord.js");
 
 module.exports = {
     name: Events.MessageCreate,
@@ -14,7 +15,7 @@ module.exports = {
                 var temp_line = '';
                 // create readable data from errorlist
                 for (let i = 0; i < temp.length; i++) {
-                    // check for '//'s, which represent new 100s range
+                    // check for ' "'s, which represent new 100s range
                     // and '\n's, which represent new lines
                     if (temp[i] == '.') {
                         lines.push(temp_line);
@@ -28,6 +29,7 @@ module.exports = {
                     }
                 }
                 let arg = [], dict ={}, values = '';
+
                 // organize data into: arg = [{name: 'name', 'value': 'values' }]
                 for (let i = 0; i < lines.length; i++) {
                     lines[i] = lines[i].trim();
@@ -36,9 +38,11 @@ module.exports = {
                             dict['value'] = values;
                             arg.push(dict)
                         }
+
                         dict = {};
                         values = '';
                         dict["name"] = lines[i];
+
                     } else if (!lines[i] == "") {
                         values = `${values}${lines[i]}\n`;
                     }
@@ -75,8 +79,6 @@ function embedWarningv2(args) {
         .addFields(
             args
         )
-        // .setImage('https://i.imgur.com/AfFp7pu.png')
         .setTimestamp();
-        // .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
     return hi;
 }

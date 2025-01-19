@@ -1,7 +1,6 @@
 const { Events } = require("discord.js");
 const embed = require('./subs/embed');
 const { get_info, upload_info } = require('./NeonDB/db_work');
-const { json_ex } = require('./subs/bulky');
 function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) };
 const { make_string } = require('./subs/helpers.js');
 require("dotenv").config();
@@ -15,13 +14,12 @@ module.exports = {
     async execute(interaction) {
         console.log(interaction)
         if (interaction.commandName == 'add_event') {
-        // interaction.reply(interaction.user.id)
+
         const eventName = interaction.options.getString('event_name');
         const eventDate = interaction.options.getString('event_date');
 
         // error handling
-        
-        // see if this is correct
+        // see if this the input from User is correct
         if (eventName.length > 30 || eventName.length < 1) {
             let strings = make_string('501 error: Please change event_name length to length of 1-30 characters', interaction.user.id);
             interaction.reply({ embeds: [embed.embedWarning(strings, 'string_len error')] });
@@ -31,7 +29,7 @@ module.exports = {
             interaction.reply({ embeds: [embed.embedWarning(strings, 'format error')] })
             return false;
         }
-        // check if date is in the right formate(2 dates, 1 dash, 0 other, all numbers)
+        // check if date is in the right format (2 dates, 1 dash, 0 other, all numbers)
         var num = [], dash = 0, other = 0;
         for (let i = 0; i < eventDate.length; i++) {
             if (eventDate[i] === "-") {
@@ -50,7 +48,7 @@ module.exports = {
         };
 
         const date = embed.getDate(num);
-        // error check from main
+        // more error checking
         if (date == 0) {
             let strings = make_string('503 error: Please change event_date hour argument to be an integer between 1 to 24', interaction.user.id);
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })

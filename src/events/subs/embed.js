@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require("discord.js");
-var exports = {};
 
 function epoch (date) {
     return Date.parse(date)
@@ -17,10 +16,7 @@ function embedWarning(warning, title) {
             { name: '\u200B', value: '\u200B' },
             { name: `Type 'Cal_App help' for commands`, value: `\u200B` },
         )
-        // .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-        // .setImage('https://i.imgur.com/AfFp7pu.png')
         .setTimestamp()
-        // .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
     return hi;
 }
 
@@ -55,10 +51,7 @@ function embedList(list) {
             { name: '\u200B', value: '\u200B' },
             { name: `Type 'Cal_App help' for commands`, value: `\u200B` },
         )
-        // .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-        // .setImage('https://i.imgur.com/AfFp7pu.png')
         .setTimestamp()
-        // .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
     return hi;
 }
 
@@ -91,13 +84,15 @@ function getDate(num) {
         return 0;
     }
     else if (timestamp - Date.now() < 0) {
+        // if time isn't right
         console.log(timestamp, Date.now(), timestamp-Date.now())
-        // should be over today
+        // should be after today
         return 1;
-    } else if (timestamp - Date.now() > (60*60*24*365*1000)) {
-        // past one year(should not be)
+    } else if (timestamp - Date.now() > (31536000000)) {
+        // should be before 1 year
         return 3;
     }
     return timestamp;
 }
+
 module.exports = { embedWarning, getDate, embedEvent, embedList };

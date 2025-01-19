@@ -14,7 +14,6 @@ const client = new Client({
     ],
     
     partials: [
-        // Partials.Channel,
         Partials.Message
     ]
 });
@@ -36,7 +35,7 @@ const commands = [
                 .setMinLength(10)
                 .setMaxLength(13)
             ),
-    new SlashCommandBuilder().setName('delete_event').setDescription(`Delete an event - name the format of the event`)
+    new SlashCommandBuilder().setName('delete_event').setDescription(`Delete an event`)
     .addStringOption(option => 
         option.setName('event_name')
             .setDescription('Your event name goes here')
@@ -55,16 +54,15 @@ for (const file of eventFiles) {
     }
 }
 
-// client.once(Event.InteractionCreate, Event.execute(call(...args, client)));
 client.login(process.env.TOKEN);
 
 const rest = new REST().setToken(process.env.TOKEN);
-// and deploy your commands!
+
+// deploy the commands
 (async () => {
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
-
-		// The put method is used to fully refresh all commands in the guild with the current set
+        
 		const data = await rest.put(
 			Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
 			{ body: commands },

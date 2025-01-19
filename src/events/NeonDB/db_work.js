@@ -1,8 +1,9 @@
 require('dotenv').config();
-const { neon } = require('@neondatabase/serverless');
-const { DATABASE_URL } = process.env;
 
-const sql = neon(DATABASE_URL);
+const { neon } = require('@neondatabase/serverless');
+
+// start db connection
+const sql = neon(process.env.DATABASE_URL);
 
 async function get_info(user_id) {
   try {

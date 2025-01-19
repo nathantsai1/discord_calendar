@@ -17,6 +17,6 @@
   },
   "keywords": [],
   "author": "Nathan Tsai",
-  "license": "ISC",
-  "description": "Discord_calendar app"
+  "license": "MIT",
+  "description": "A Discord bot that allows users to create and manage events in a calendar."
 }

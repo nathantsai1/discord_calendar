@@ -2,4 +2,5 @@
 node_modules
 /src/events/txts/outlines.txt
 /src/events/txts/sample.txt
+/src/events/txts/checklist.txt
 /src/events/subs/bulky.js

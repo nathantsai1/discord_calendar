@@ -1,8 +1,8 @@
+require("dotenv").config();
+
 const { get_info } = require('./NeonDB/db_work');
 const { Events } = require("discord.js");
-const { embedList, embedWarning } = require('./subs/embed');
-
-require("dotenv").config();
+const { embedList } = require('./subs/embed');
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -11,12 +11,11 @@ module.exports = {
         if (interaction.commandName == "list_events") {
             console.log('working on /list_events')
             const get_events = await get_info(interaction.user.id);
-            console.log(get_events)
+            
             // send events
-            console.log(get_events.length == 0, get_events)
-
             if (get_events.length == 0) {
                 interaction.reply({ embeds: [ embedList([{name: 'None', value: "```There seems to be no events with user '" + interaction.user.globalName + "'```"}])], ephemeral: true });
+                
             } else {
                 let list = [];
                 let dates;
