@@ -31,7 +31,7 @@ async function upload_info(user_id, eventName, eventDate, server_id, event_chann
     const result = await sql`
       INSERT INTO public.calendar_events_real
       (discord_user_id, event_date, event_name, server_id, event_channel_id)
-      VALUES (${user_id.toString()}, ${eventDate.toString()}, ${eventName.toString()}, ${server_id.toString()}, ${event_channel_id.toString()})`;
+      VALUES (${user_id.toString()}, ${eventDate.toString()}, ${eventName.toString()}, ${server_id}, ${event_channel_id})`;
       return result;
   } catch (NeonDBError) {
     console.log('Error Caught Successfully!');

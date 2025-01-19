@@ -3,8 +3,6 @@ require("dotenv").config();
 const { REST, Routes, Client, GatewayIntentBits, SlashCommandBuilder, Partials } = require("discord.js");
 const path = require('node:path');
 const fs = require("fs");
-const { call } = require('./events/subs/call_events.js');
-const { embedEvent } = require('./events/subs/embed.js');
 
 const client = new Client({
     intents: [
@@ -27,7 +25,7 @@ const commands = [
         Scratch will tell/remind you time to date/event`)
         .addStringOption(option => 
             option.setName('event_name')
-                .setDescription('Your event name goes here(limit 30 characters and 5 EVENTS TOTAL)')
+                .setDescription('Your event name goes here(limit 30 characters and 10 EVENTS TOTAL)')
                 .setRequired(true)
                 .setMaxLength(30)
             )
@@ -56,6 +54,7 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
+
 // client.once(Event.InteractionCreate, Event.execute(call(...args, client)));
 client.login(process.env.TOKEN);
 
@@ -70,23 +69,8 @@ const rest = new REST().setToken(process.env.TOKEN);
 			Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
 			{ body: commands },
 		);
-
+    
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-        let x=0;
-
-        let output;
-        while (x < 30) {
-            output = await call();
-            console.log('output', output, 'output')
-            if (output == output) {
-                for (const z in output) {
-                    client.users.fetch(output[z][0], false).then((user) => { 
-                        user.send({ embeds: [ embedEvent(output[z][1], output[z][2])]}); 
-                    });
-                }
-            }
-            x++;
-        };
 	} catch (error) {
 		console.error(error);
 	}

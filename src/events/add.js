@@ -13,6 +13,7 @@ module.exports = {
     name: Events.InteractionCreate,
     once: false,
     async execute(interaction) {
+        console.log(interaction)
         if (interaction.commandName == 'add_event') {
         // interaction.reply(interaction.user.id)
         const eventName = interaction.options.getString('event_name');
@@ -93,7 +94,12 @@ module.exports = {
         }
 
         // success, start on getting interaction
-        const infov2 = upload_info(interaction.user.id, eventName, date, interaction.guildId, interaction.channelId);
+        let infov2;
+        if (interaction.guildId == null) {
+            infov2 = upload_info(interaction.user.id, eventName, date, null, null);
+        } else {
+            infov2 = upload_info(interaction.user.id, eventName, date, interaction.guildId.toString(), interaction.channelId.toString());
+        }
         if (infov2 && infov2 == 1) {
             let strings = make_string(`500 internal error: The Calendar App has found an error; We are currently trying our best to fix it. Thank you for your patience.`, interaction.user.id);
             interaction.reply({ embeds: [embed.embedWarning(strings, 'InternalServerError')], ephemeral: true });
