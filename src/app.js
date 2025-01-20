@@ -4,7 +4,7 @@ const { REST, Routes, Client, GatewayIntentBits, SlashCommandBuilder, Partials }
 const path = require('node:path');
 const fs = require("fs");
 
-const keepAlive = require('./events/keepAlive');
+const keepAlive = require('./events/subs/keepalive.js');
 
 const client = new Client({
     intents: [
