@@ -56,7 +56,7 @@ module.exports = {
                     {name: '/add_event', value: `Adds an event to the discord_calendar_app's DB(5 events max per user).
                                                 It takes in two required arguments: 
                                                 event_name, the name of the event being added, with a max of 30 characters, and
-                                                event_date, which takes in the date, in local time, of the event: It must follow either format: MM-DD-YYYY or  MM-DD-YYYY`},
+                                                event_date, which takes in the date, in GMT time, of the event: It must follow either format: MM-DD-YYYY or  MM-DD-YYYY`},
                     {name: "/delete_event", value: `Deletes an event that has not came up yet. It takes in one required parameter:
                                                 event_name. THIS ACTION IS NOT REVERSIBLE`},
                     {name: "/list_events", value: `Lists all events under your user profile.`},

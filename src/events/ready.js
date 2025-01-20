@@ -16,7 +16,7 @@ module.exports = {
                     )
                 .addStringOption(option => 
                     option.setName('event_date')
-                        .setDescription('The date and time of the event - follow format(w/ optional hour input, local time): MM-DD-YYYY HH')
+                        .setDescription('The date and time of the event - follow format(w/ optional hour input, GMT time): MM-DD-YYYY HH')
                         .setRequired(true)
                         .setMinLength(10)
                         .setMaxLength(13)
