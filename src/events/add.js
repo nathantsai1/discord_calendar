@@ -12,7 +12,6 @@ module.exports = {
     name: Events.InteractionCreate,
     once: false,
     async execute(interaction) {
-        console.log(interaction)
         if (interaction.commandName == 'add_event') {
 
         const eventName = interaction.options.getString('event_name');

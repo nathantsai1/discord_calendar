@@ -9,7 +9,6 @@ async function get_info(user_id) {
   try {
     const result = await sql`SELECT * FROM public.calendar_events_real 
       WHERE discord_user_id = ${user_id.toString()}`;
-    console.log(result);
     return result;
   } catch (error) {
       console.log(error);
@@ -35,8 +34,7 @@ async function upload_info(user_id, eventName, eventDate, server_id, event_chann
       VALUES (${user_id.toString()}, ${eventDate.toString()}, ${eventName.toString()}, ${server_id}, ${event_channel_id})`;
       return result;
   } catch (NeonDBError) {
-    console.log('Error Caught Successfully!');
-    console.log(NeonDBError);
+    console.log('[Error]', NeonDBError);
     return 1;
   }
 }

@@ -84,9 +84,7 @@ function getDate(num) {
         return 0;
     }
     else if (timestamp - Date.now() < 0) {
-        // if time isn't right
-        console.log(timestamp, Date.now(), timestamp-Date.now())
-        // should be after today
+        // the time: should be after today
         return 1;
     } else if (timestamp - Date.now() > (31536000000)) {
         // should be before 1 year

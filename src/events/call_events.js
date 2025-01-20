@@ -15,7 +15,6 @@ module.exports = {
       let info = await get_all_info();
       // check if info is coming up
       if (!info.length == 0) {
-        console.log('lookgged')
         for (const z in info) {
           i = info[z];
           event_time = Number(i['event_date']) - Date.now();
@@ -68,7 +67,6 @@ let delay = async function (n) {
 }
 
 let fetch = async function (client, i) {
-  console.log('i', i, 'i')
   try {
     if (i[1].event_channel_id !== null) {
       const channel = client.channels.cache.get(i[1].event_channel_id);
