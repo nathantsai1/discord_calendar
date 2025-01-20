@@ -55,7 +55,7 @@ module.exports = {
             return false;
         } else if (date == 1) {
             let dating = new Date()
-            let strings = make_string(`503 error: Please change event_date to be after ${dating.toLocaleDateString('en-US')}T${dating.getHours()}:${dating.getMinutes()}:${dating.getSeconds()} Locale time`, interaction.user.id);
+            let strings = make_string(`503 error: Please change event_date to be after ${dating.toLocaleDateString('en-US')}T${dating.getHours()}:${dating.getMinutes()}:${dating.getSeconds()} GMT time`, interaction.user.id);
             interaction.reply({ embeds: [embed.embedWarning(strings, 'event_date error')], ephemeral: true })
             return false;
         } else if (date == 3) {
