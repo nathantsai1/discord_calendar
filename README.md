@@ -20,30 +20,25 @@
 
 <b>2a. Fork this repo to make your own</b>
 
-<b>2b. Fill out the '.env.sample' file</b>
+### 2b. Fill out the '.env.sample' file
+Rename the '.env.sample' file to be a '.env' file
+Fill out the '.env' file correctly. DO NOT SHARE ANY OF THIS INFORMATION WITH ANYONE ELSE OR YOUR DATA WILL GET STOLEN - </br>
+    a. Go to [Discord for Developers](https://discord.com/developers). Log in with your normal discord account or sign up for a new one. 
+    b. Click 'New Application' and name your bot. Then, in the 'General Information' tab, copy your 'Application ID' and replace the CLIENT_ID in the '.env' file with it.  </br>
+    c. Go to the 'Bot' tab, and click 'Add Bot'. Click 'Reset Token' and copy that. Paste it into the 'TOKEN' variable in the '.env' file</br>
+    d. Go to [NeonDB](https://neon.tech) and create an account. Fill out the details, and click on the 'Branches' tab, then the 'main' branch. Name your branch, and select the 'main' branch as the 'Parent Branch'</br>
+    e. A link containing sensitive information will be shown. Exit out of this, and go to the 'Tables' tab. Create a new table, and use the same names and types as the columns listed: ![ open: https://cloud-lawetcqw5-hack-club-bot.vercel.app/0screenshot__87_.png](https://cloud-lawetcqw5-hack-club-bot.vercel.app/0screenshot__87_.png)</br>
+    f. Go to the 'Dashboard' tab, click on 'Show Password' in the 'Connection Details' subpoint and copy the 'Connection String'. Make sure that the selected database has the same schema as the one above. </br>
+    g. Go to [Discord](discord.com/login) and turn on [Development Mode](https://www.howtogeek.com/714348/how-to-enable-or-disable-developer-mode-on-discord/). Then copy the server id(Double click on the server that you will be adding this to, and select 'Copy ID'). Add this to the 'GUILD_ID' variable in the'.env' file.
 
-    Rename the '.env.sample' file to be a '.env' file
-    Fill out the '.env' file correctly. DO NOT SHARE ANY OF THIS INFORMATION WITH ANYONE ELSE OR YOUR DATA WILL GET STOLEN - 
-        a. Go to [Discord for Developers](https://discord.com/developers). Log in with your normal discord account or sign up for a new one. 
-        b. Click 'New Application' and name your bot. Then, in the 'General Information' tab, copy your 'Application ID' and replace the CLIENT_ID in the '.env' file with it.
-        c. Go to the 'Bot' tab, and click 'Add Bot'. Click 'Reset Token' and copy that. Paste it into the 'TOKEN' variable in the '.env' file
-        d. Go to [NeonDB](https://neon.tech) and create an account.
-        Fill out the details, and click on the 'Branches' tab, then the 'main' branch. Name your branch, and select the 'main' branch as the 'Parent Branch'
-        e. A link containing sensitive information will be shown. Exit out of this, and go to the 'Tables' tab. Create a new table, and use the same names and types as the columns listed. 
-        f. Go to the 'Dashboard' tab, click on 'Show Password' in the 'Connection Details' subpoint and copy the 'Connection String'. Make sure that the selected database has the same schema as the one above.
-        g. Go to [Discord](discord.com/login) and turn on [Development Mode](https://www.howtogeek.com/714348/how-to-enable-or-disable-developer-mode-on-discord/). Then copy the server id(Double click on the server that you will be adding this to, and select 'Copy ID'). Add this to the 'GUILD_ID' variable in the'.env' file.
-
-<b>2c. Download the libraries in the package.json</b>
-
+<b>2c. Download the libraries in the package.json</b></br>
     Run 'npm install' in the terminal to do so.
 
-<b>2d. Run the program</b>
-
+<b>2d. Run the program</b></br>
     Run 'nodemon' in the terminal to do so.
 
-<b>2e. Add the app to your server/user apps</b>
-
-    Go back to [Discord for Developers](https://discord.com/developers), open up your app, and go to the 'Installation' tab. First check the 'User Install' and 'Guild Install' at the top, then scroll to the bottom and click in the 'User Install' scope 'applications.commands'. In the 'Guild Install', select the scopes 'applications.commands' and 'bot'. Then, scroll down to check 'Administrator'. Copy the 'Discord Provided Link' above the 'Default Install Settings' and open it up in a new tab. Select either 'Add to my Apps' or 'Add to Server'. Agree to all the terms. To set this up for DMs, go back to the Developer site, and switch the Integration Type to 'User Install'. Open the link at the bottom and click add to server. Agree to all the terms.
+<b>2e. Add the app to your server/user apps</b> </br>
+    Go back to [Discord for Developers](https://discord.com/developers), open up your app, and go to the 'Installation' tab. First check the 'User Install' and 'Guild Install' at the top, then scroll to the bottom and select the following Install Settings: ![Create Events, Create Private Threads, Create Public Threads, Read Message History, Send Messages, Send Messages in Threads, Use Embedded Activities, Use Slash Commands and View Channels at the bottom](https://cloud-i72x9zdo9-hack-club-bot.vercel.app/0screenshot__88_.png). Copy the 'Discord Provided Link' above the 'Default Install Settings' and open it up in a new tab. Select either 'Add to my Apps' or 'Add to Server'. Agree to all the terms. To set this up for DMs, go back to the Developer site, and switch the Integration Type to 'User Install'. Open the link at the bottom and click add to server. Agree to all the terms.
 
 ## How to use
 
